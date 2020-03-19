@@ -5,7 +5,8 @@ const Author = require('../Author')
 module.exports = {
   get: (id) => {
     return Author.query()
-      .where({ id }).eager('organization').first()
+      .where({ id })
+        //.eager('organization').first()
   },
 
   create: (body) => {

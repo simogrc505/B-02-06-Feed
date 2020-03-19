@@ -3,9 +3,10 @@ const { if_exists, if_already_exists } = require('../../utilities/errors_code')
 const Category = require('../Category')
 
 module.exports = {
-  get: (id) => {
+  get: (id, domain) => {
     return Category.query()
-      .where({ id }).eager('organization').first()
+      .where({ c_data: id }).andWhere({domain:domain})
+        //.eager('organization').first()
   },
 
   create: (body) => {

@@ -33,13 +33,30 @@ const create = (req, res) => {
                 description: item.description,
                 link: item.link,
             }),
-            rss.items.map(item => repo_author.create({
-                    id: item.author
-                }),
-                rss.items.map(item => repo_category.create({
-                        c_data: item.category._,
-                        domain: item.category.domain
+            rss.items.map(item => {
+                repo_author.get(item.author)
+                    .then((author) => {
+                    if (!author){
+                       return repo_author.create({
+                            id: item.author
+                        })
+                    }
+                    else return author
                     })
+                },
+                rss.items.map(item => {
+                    repo_category.get(item.category._, item.category.domain)
+                        .then((category) => {
+                            if(!category){
+                               return repo_category.create({
+                                    c_data: item.category._,
+                                    domain: item.category.domain
+                                })
+                            }
+                            else return category
+                        })
+
+                    }
                 ))
         ))
         .then((promises) => Promise.all(promises))
