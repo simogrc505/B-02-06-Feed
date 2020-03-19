@@ -1,0 +1,24 @@
+{
+  "db":  {
+    "connection": {
+      "host": "DB_HOST",
+      "user": "DB_USER",
+      "password": "DB_PASS",
+      "database": "DB_NAME"
+    }
+  },
+  "endpoints": {
+    "user": "ENDPOINT_USER"
+  },
+  "s3": {
+    "region": "eu-west-1",
+    "bucket": "AWS_S3_BUCKET"
+  },
+  "log": {
+    "name": "SERVICE_NAME",
+    "base": {
+      "region": "AWS_REGION",
+      "env": "NODE_ENV"
+    }
+  }
+}
